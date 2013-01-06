@@ -1,2 +1,2 @@
-LaTeX template
+P2
 ==
