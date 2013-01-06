@@ -1,0 +1,134 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.0in]{geometry}
+\usepackage[danish]{babel}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{here} % added by Lasse
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{mathtools} % added by Lasse
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\newcommand*{\tabbox}[2][t]{\vspace{0pt}\parbox[#1][3.7\baselineskip]{1cm}{\strut#2\strut}}
+
+\setcounter{tocdepth}{1}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\renewcommand{\sectionmark}[1]{}
+
+\setlength\parindent{0pt}
+
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
+\newcommand{\textCode}{Kodeudsnit}
+\renewcommand{\lstlistingname}{\textCode}
+\newcommand{\textTable}{Tabel }
+
+\newcommand{\chapterName}{}		% Indeholder mappenavnet på det nuværende kapitel
+\newcommand{\sectionName}{}		% Indeholder navnet på den nuværende sektion
+\newcommand{\subsectionName}{}	% Indeholder navnet på det nuværende afsnit
+\newcommand{\subsubsectionName}{}	% Indeholder navnet på det nuværende underafsnit
+\newcommand{\chap}[2]{			% Tilføjer et kapitel og sætter mappenavnet
+	\cleardoublepage
+	\chapter{#1}\label{chap:#2}
+	\renewcommand{\chapterName}{#2}
+	\input{sections/#2}
+}
+\newcommand{\chapX}[2]{			% Tilføjer et kapitel og sætter mappenavnet
+	\cleardoublepage
+	\chapter{#1}\label{chap:#2}
+	\renewcommand{\chapterName}{#2}
+}
+\newcommand{\chapIntro}[2]{
+	\renewcommand{\chapterName}{intro}
+	\cleardoublepage
+	\chapter*{#1}\label{chap:#2}
+	\thispagestyle{empty}
+	\graphicspath{{sections/\chapterName /#2/}}
+	\input{sections/\chapterName /#2}	
+}
+\newcommand{\textFig}{Figur }	% Indsætter teksten foran et reference til et billede
+\newcommand{\sect}[2]{			% Indsætter en section i det nuværende kapitel
+	\renewcommand{\sectionName}{#2}
+	\section{#1}\label{sect:\chapterName :#2}
+	\graphicspath{{sections/\chapterName /#2/}}
+	\input{sections/\chapterName /#2}
+}
+\newcommand{\subsect}[2]{
+	\renewcommand{\subsectionName}{#2}
+	\subsection{#1}\label{subsect:\chapterName :\sectionName :#2}
+}
+\newcommand{\subsubsect}[2]{
+	\renewcommand{\subsubsectionName}{#2}
+	\subsubsection{#1}\label{subsubsect:\chapterName :\sectionName :\subsectionName :#2}
+}
+\newcommand{\fig}[3][]{		% Indsætter et billede ud fra kapitel og afsnit
+	\includegraphics[#1]{sections/\chapterName /\sectionName /#2}
+	\caption{#3}
+	\label{fig:\chapterName :\sectionName :#2}
+}
+\newcommand{\figX}[2][]{		% Indsætter et billede ud fra kapitel og afsnit
+	\includegraphics[#1]{sections/\chapterName /\sectionName /#2}
+	\label{fig:\chapterName :\sectionName :#2}
+}
+% Reference til billede i samme section
+\newcommand{\reffig}[1]{\textFig\ref{fig:\chapterName :\sectionName :#1}}
+\newcommand{\reffigx}[3]{	% Reference til billede i andet kapitel og sektion
+	\textFig\ref{fig:#1:#2:#3}
+}
+\newcommand{\refchap}[1]{Kapitel \ref{chap:#1} "\nameref{chap:#1}"}
+\newcommand{\refsect}[2]{Sektion \ref{sect:#1:#2} "\nameref{sect:#1:#2}"}
+\newcommand{\refsubsect}[3]{Afsnit \ref{subsect:#1:#2:#3} "\nameref{subsect:#1:#2:#3}"}
+\newcommand{\refsubsubsect}[4]{Underafsnit \ref{subsubsect:#1:#2:#3:#4} "\nameref{subsubsect:#1:#2:#3:#4}"}
+
+\graphicspath{{figs/}}		% Mappenavne til figure
+
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\addHeaderFooter}{
+	\renewcommand{\headrulewidth}{0.5pt}
+	\renewcommand{\footrulewidth}{0.5pt}
+	\fancyhead[LE,RO]{\leftmark}
+	\fancyfoot[LE,RO]{Side \thepage\ af \pageref{LastPage}}
+	\setcounter{page}{1}
+}
+
+\newcommand{\insertListoffigures}{
+	\phantomsection
+	\addcontentsline{toc}{chapter}{\listfigurename}
+	\listoffigures
+}
+\newcommand{\insertListoftables}{
+	\phantomsection
+	\addcontentsline{toc}{chapter}{\listtablename}
+	\listoftables
+}
+\newcommand{\insertBibtex}[1]{
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Litteratur}
+	\bibliographystyle{IEEE}
+	\bibliography{#1}
+}
+\newcommand{\insertTableofcontents}{
+	\tableofcontents
+	\thispagestyle{empty}
+	\addtocontents{toc}{\protect\thispagestyle{empty}}
+}
+\newcommand{\documentBegin}{
+	\fancyhf{}
+	\title{\reportTitle}
+}
+
+\newcommand{\reportTitle}{[[\\reportTitle]]}

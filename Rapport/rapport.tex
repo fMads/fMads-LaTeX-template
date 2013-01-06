@@ -1,0 +1,67 @@
+\documentclass[12pt,twoside]{report}
+\include{init}
+
+% \renewcommand{\reportTitle}{•}
+
+% \chap{Kapitelnavn}{kapitelmappe}
+% \sect{Sektionsnavn}{filnavn}
+% \subsect{Afsnitsnavn}{refnavn}
+% \subsubsect{Underafsnitsnavn}{refnavn}
+% \fig[options]{filnavn}
+
+% \reffig{filnavn}
+% \reffigx{kapitelmappe}{sektion-fil}{afsnit-ref}
+% \refchap{kapitelmappe}
+% \refsect{kapitelmappe}{sektion-fil}
+% \refsubsect{kapitelmappe}{sektion-fil}{afsnit-ref}
+% \refsubsubsect{kapitelmappe}{sektion-fil}{afsnit-ref}{underafsnit-ref}
+
+\begin{document}
+\documentBegin{}
+
+%\includepdf[pages={-}]{}\newpage
+
+\chapIntro{Synopsis}{synopsis}
+\chapIntro{Forord}{forord}
+
+
+\newpage
+\insertTableofcontents{}
+
+
+\chap{Indledning}{indledning}
+\addHeaderFooter{}
+
+
+\chap{Problemanalyse}{analyse}
+\sect{Opsummering}{opsummering}
+
+
+\chap{Kravspecifikation}{kravspecifikation}
+\sect{Opsummering}{opsummering}
+
+
+\chap{Udvikling af løsning}{produktudvikling}
+\sect{Opsummering}{opsummering}
+
+
+\chap{Accepttest}{test}
+\sect{Opsummering}{opsummering}
+
+
+\chap{Afrunding}{afrunding}
+
+
+\cleardoublepage
+\insertListoffigures{}
+\insertListoftables{}
+
+
+\cleardoublepage
+\insertBibtex{bibtex}
+
+
+\cleardoublepage
+\chapX{Bilag}{bilag}
+
+\end{document}
